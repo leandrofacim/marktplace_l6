@@ -2,7 +2,7 @@
 
 @section('content')
 <h1>Criar Produto</h1>
-<form action="{{route('admin.products.store')}}" method="post">
+<form action="{{route('admin.products.store')}}" method="post" enctype="multipart/form-data">
    @csrf
    
     <div class="form-group">
@@ -42,6 +42,18 @@
         @enderror
     </div>
     <div class="form-group">
+        <label for="">Categoria</label>
+        <select class="selectpicker form-control" id="select-category" title="Selecione as Categorias" multiple data-live-search="true" name="categories[]">
+            @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Fotos do Produto</label>
+        <input type="file" class="form-control" name="photos[]" multiple>
+    </div>
+    <div class="form-group">
         <label for="">Slug</label>
         <input class="form-control" type="text" name="slug">
     </div>
@@ -51,3 +63,9 @@
 </form>
 
 @endsection
+
+<script>
+$(function () {
+    $('select').selectpicker();
+});
+</script>

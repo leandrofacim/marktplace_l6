@@ -4,7 +4,7 @@
 
 <div class="table-responsive-sm">
     @if (!$store)
-        <a href="{{route('admin.stores.create')}}" class="btn btn-sm btn-success">Criar Loja</a>
+        <a href="{{route('admin.stores.create')}}" class="btn btn-sm btn-success mb-3">Criar Loja</a>
     @endif
     <table class="table table-striped table-hover ">
         <thead class="thead-light">

@@ -11,6 +11,11 @@
 |
 */
 
+// use Illuminate\Routing\Route;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -87,6 +92,9 @@ Route::group(['middleware' => 'auth'], function() {
         
             Route::resource('stores', 'StoreController');
             Route::resource('products', 'ProductsController');
+            Route::resource('categories', 'CategoryController');
+
+            Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
         });
 });
 

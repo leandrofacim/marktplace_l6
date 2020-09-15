@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="table-responsive-sm">
-    <a href="{{route('admin.products.create')}}" class="btn btn-sm btn-success">Criar Produto</a>
+    <a href="{{route('admin.products.create')}}" class="btn btn-sm btn-success mb-3">Criar Produto</a>
     <table class="table table-striped table-hover ">
         <thead class="thead-light">
             <tr>

@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Marketplace L6</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -26,7 +32,10 @@
                     <a class="nav-link" href="{{route('admin.stores.index')}}">Lojas <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item @if (request()->is('admin/products*')) active @endif">
-                <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
+                    <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
+                </li>
+                <li class="nav-item @if (request()->is('admin/categories*')) active @endif">
+                    <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
                 </li>
             </ul>
             <div class="my-2 my-lg-0">
@@ -56,12 +65,3 @@
     </div>
 </body>
 </html>
-
-{{-- <style>
-    .nav-item .name {
-        color: #fff;
-       
-        align-items: center;
-        justify-content: center
-    }
-</style> --}}

@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
             'description' => 'required',
             'body'        => 'required',
             'price'       => 'required',
+            'photos.*'      => 'image',
         ];
     }
 
@@ -35,6 +36,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'required' => 'Esse campo é obrigatorio',
+            'image'    => 'Arquivo não é uma imagem válida!',
         ];
     }
 }

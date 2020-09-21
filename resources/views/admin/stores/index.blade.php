@@ -4,8 +4,8 @@
 
 <div class="table-responsive-sm">
     @if (!$store)
-        <a href="{{route('admin.stores.create')}}" class="btn btn-sm btn-success mb-3">Criar Loja</a>
-    @endif
+        <a href="{{ route('admin.stores.create') }}" class="btn btn-sm btn-success mb-3">Criar Loja</a>
+    @else
     <table class="table table-striped table-hover ">
         <thead class="thead-light">
             <tr>
@@ -17,13 +17,14 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{$store->id}}</td>
-                <td>{{$store->name}}</td>
-                <td>{{$store->products->count()}}</td>
+                <td>{{ $store->id }}</td>
+                <td>{{ $store->name }}</td>
+                <td>{{ $store->products->count() }}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{route('admin.stores.edit', ['store' => $store->id])}}" class="btn btn-sm btn-warning">Editar</a>
-                        <form action="{{route('admin.stores.destroy', ['store' => $store->id])}}" method="POST">
+                        <a href="{{ route('admin.stores.edit', ['store' => $store->id]) }}"
+                            class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('admin.stores.destroy', ['store' => $store->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger ml-1">Remover</button>
@@ -33,7 +34,7 @@
             </tr>
         </tbody>
     </table>
-    
+@endif
 </div>
 
 @endsection

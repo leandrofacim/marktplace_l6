@@ -37,11 +37,12 @@
     </div>
     <div class="form-group">
         <label>Fotos do Produto</label>
-        <input type="file" class="form-control" name="photos[]" multiple>
-    </div>
-    <div class="form-group">
-        <label for="">Slug</label>
-        <input class="form-control" type="text" name="slug" value="{{$products->slug}}">
+        <input type="file" class="form-control @error('photos.*') is-invalid @enderror" name="photos[]" multiple>
+        @error('photos.*')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
     </div>
 
     <div>

@@ -43,7 +43,7 @@
     </div>
     <div class="form-group">
         <label for="">Categoria</label>
-        <select class="selectpicker form-control" id="select-category" title="Selecione as Categorias" multiple data-live-search="true" name="categories[]">
+        <select class=" selectpicker form-control" id="select-category" title="Selecione as Categorias" multiple data-live-search="true" name="categories[]">
             @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
             @endforeach

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Payment\PagSeguro\CreditCard;
 use Illuminate\Http\Request;
-
 use function Psy\debug;
 
 class CheckoutController extends Controller
 {
+
     public function index()
     {
         if (!auth()->check()) {
@@ -16,7 +16,8 @@ class CheckoutController extends Controller
         }
         $this->makePagSeguroSession();
 
-        if (!session()->has('cart'))  return redirect()->route('home');
+        if (!session()->has('cart'))
+            return redirect()->route('home');
 
         $cartItems = array_map(function ($line) {
             return $line['amount'] * $line['price'];
@@ -33,32 +34,36 @@ class CheckoutController extends Controller
             $dataPost = $request->all();
             $user = auth()->user();
             $cartItems = session()->get('cart');
+            $stores = array_unique(array_column($cartItems, 'store_id'));
             $refence = 'XPTO';
 
-            $creditCardPayment = new CreditCard($cartItems,  $user, $dataPost, $refence);
+            $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $refence);
 
             $result = $creditCardPayment->doPayment();
 
             $userOrder = [
-                'reference'        => $refence,
-                'pagseguro_code'   => $result->getCode(),
+                'reference' => $refence,
+                'pagseguro_code' => $result->getCode(),
                 'pagseguro_status' => $result->getStatus(),
-                'items'            => serialize($cartItems),
-                'store_id'         => 42
+                'items' => serialize($cartItems),
+                'store_id' => 41
             ];
 
-            $user->orders()->create($userOrder);
+            $userOrder = $user->orders()->create($userOrder);
+
+		    $userOrder->stores()->sync($stores);
 
             session()->forget('cart');
             session()->forget('pagseguro_session_code');
 
             return response()->json([
                 'data' => [
-                    'status'  => true,
+                    'status' => true,
                     'message' => 'Pedido criado com sucesso!',
-                    'order'   => $refence,  
+                    'order' => $refence,
                 ],
             ]);
+
         } catch (\Exception $e) {
             $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar pedido!';
 

@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
-
 Route::get('/products/{slug}', 'HomeController@single')->name('product.single');
+Route::get('/category/{slug}', 'CategoryController@index')->name('category.single');
+Route::get('/store/{slug}', 'StoreController@index')->name('store.single');
 
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', 'CartController@index')->name('index');
@@ -36,8 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('stores', 'StoreController');
         Route::resource('products', 'ProductsController');
         Route::resource('categories', 'CategoryController');
-
+        
         Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
+
+        Route::get('orders/my', 'OrdersController@index')->name('orders.my');
     });
 });
 

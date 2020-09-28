@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Traits\UploadTrait;
@@ -13,10 +14,12 @@ class ProductsController extends Controller
     use UploadTrait;
 
     private $product;
+    private $categoty;
 
-    public function __construct(Product $product)
+    public function __construct(Product $product, Category $category)
     {
         $this->product = $product;
+        $this->categoty = $category;
     }
     /**
      * Display a listing of the resource.
@@ -38,8 +41,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = \App\Category::all(['id', 'name']);
-
+        $categories = $this->categoty::all(['id', 'name']);
+        
         return view('admin.products.create', compact('categories'));
     }
 
@@ -52,8 +55,11 @@ class ProductsController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
-        $categories = $request->get('categories', null);
+        
+        $categories = $request->get('categories');
+        
         $store = auth()->user()->store;
+        
         $product = $store->products()->create($data);
 
         $product->categories()->sync($categories);

@@ -39,17 +39,19 @@
             </li>
             
             @foreach ($categories as $category)
-                <li class="nav-item">
-                    <a class="nav-link" href="#"> {{ $category->name }} </a>
+                <li class="nav-item" @if(request()->is('category/' . $category->slug)) active @endif>
+                    <a class="nav-link" href=" {{route('category.single', ['slug' => $category->slug])}} "> {{ $category->name }} </a>
                 </li>
             @endforeach
         </ul>
 
         <div class="my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" style="margin-top: 0%">
-                    <a href="#" class="nav-link"><span>{{auth()->user()->name}}</span></a>
-                </li> 
+                @if (isset(auth()->user()->name))
+                    <li class="nav-item" style="margin-top: 0%">
+                        <a href="#" class="nav-link"><span>{{auth()->user()->name}}</span></a>
+                    </li> 
+                @endif
                 <li class="nav-item">
                     <a 
                         href=" {{route('cart.index')}} " 

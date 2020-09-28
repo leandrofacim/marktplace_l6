@@ -3,9 +3,9 @@
 
 @section('content')
 
-    <a href="{{route('admin.categories.create')}}" class="btn btn-sm btn-success mb-3">Criar Categoria</a>
+    <a href="{{route('admin.categories.create')}}" class="btn btn-lg btn-success">Criar Categoria</a>
 
-    <table class="table table-striped table-hover">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>#</th>
@@ -20,11 +20,11 @@
                     <td>{{$category->name}}</td>
                     <td width="15%">
                         <div class="btn-group">
-                            <a href="{{route('admin.categories.edit', ['category' => $category->id])}}" class="btn btn-sm btn-primary" >EDITAR</a>
+                            <a href="{{route('admin.categories.edit', ['category' => $category->id])}}" class="btn btn-sm btn-primary">EDITAR</a>
                             <form action="{{route('admin.categories.destroy', ['category' => $category->id])}}" method="post">
                                 @csrf
                                 @method("DELETE")
-                                <button type="submit" class="btn btn-sm btn-danger ml-1">REMOVER</button>
+                                <button type="submit" class="btn btn-sm btn-danger">REMOVER</button>
                             </form>
                         </div>
                     </td>

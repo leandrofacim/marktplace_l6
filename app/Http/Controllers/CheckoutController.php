@@ -34,6 +34,7 @@ class CheckoutController extends Controller
             $dataPost = $request->all();
             $user = auth()->user();
             $cartItems = session()->get('cart');
+            dd($cartItems);
             $stores = array_unique(array_column($cartItems, 'store_id'));
             $refence = 'XPTO';
 

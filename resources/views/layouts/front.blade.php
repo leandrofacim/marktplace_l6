@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Marketplace L6</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href=" {{asset('css/app.css')}} ">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .front.row {
@@ -17,7 +17,7 @@
     @yield('stylesheets')
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 40px;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 40px;">
 
     <a class="navbar-brand" href="{{route('home')}}">Marketplace L6</a>
     <button 
@@ -46,12 +46,29 @@
         </ul>
 
         <div class="my-2 my-lg-0">
+
             <ul class="navbar-nav mr-auto">
-                @if (isset(auth()->user()->name))
-                    <li class="nav-item" style="margin-top: 0%">
-                        <a href="#" class="nav-link"><span>{{auth()->user()->name}}</span></a>
-                    </li> 
-                @endif
+            @auth
+                <li class="nav-item dropdown">
+                    <a 
+                        class="nav-link dropdown-toggle" 
+                        href="#" id="navbarDropdown" 
+                        role="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                    >
+                    <span>{{auth()->user()->name}}</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{route('user.orders')}} ">Meus pedidos</a>
+                      {{-- <a class="dropdown-item" href="#">Another action</a> --}}
+                      <div class="dropdown-divider"></div>
+                      {{-- <a class="dropdown-item" href="#">Something else here</a> --}}
+                    </div>
+                  </li>
+            @endauth
+               
                 <li class="nav-item">
                     <a 
                         href=" {{route('cart.index')}} " 
@@ -72,6 +89,8 @@
     @include('flash::message')
     @yield('content')
 </div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="{{asset('js/app.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

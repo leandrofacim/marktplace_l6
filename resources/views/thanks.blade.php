@@ -2,7 +2,7 @@
 
 @section('content')
     <h2 class="alert alert-success">
-        Muito obrigado {{$user->name}} por sua compra!
+        Muito obrigado @if ($user->name) {{$user->name}} por realizar essa compra! @endif 
     </h2>
     <h3>
         Seu pedido foi processado, código do pedido: {{ request()->get('order') }}

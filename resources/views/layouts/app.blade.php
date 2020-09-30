@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -43,9 +43,18 @@
             </ul>
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item" style="margin-top: 0%">
+                        <a class="nav-link" href=" {{route('admin.notification.index')}} ">
+                            <span class="badge badge-danger">{{auth()->user()->unreadNotifications->count()}}</span>
+                            <span><i class="fa fa-bell"></i></span>
+                        </a>
+                    </li>
+
                     <li class="nav-item" style="margin-top: 0%">
                         <a href="#" class="nav-link"><span>{{auth()->user()->name}}</span></a>
                     </li>
+
                     <li class="nav-item">
                         <a 
                             class="nav-link" href="#" 
@@ -57,6 +66,7 @@
                             @csrf
                         </form>
                     </li>
+
                 </ul>
             </div>
             @endauth

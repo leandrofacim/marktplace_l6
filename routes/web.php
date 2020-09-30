@@ -44,8 +44,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
 
         Route::get('orders/my', 'OrdersController@index')->name('orders.my');
+        Route::get('notifications', 'NotificationController@notifications')->name('notification.index');
+        Route::get('notifications/read-all', 'NotificationController@readAll')->name('notfications.read.all');
+        Route::get('notifications/read/{notification}', 'NotificationController@read')->name('notfications.read');
     });
 });
 
+// Route::get('not', function() {
+//     $user = \App\User::find(41);
+//     $user->notify(new \App\Notifications\StoreReceiveNewOrder());
+
+//     return $user->notifications;
+// });
 
 Auth::routes();

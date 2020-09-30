@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Payment\PagSeguro\CreditCard;
+use App\Store;
 use Illuminate\Http\Request;
 use function Psy\debug;
 
@@ -34,7 +35,7 @@ class CheckoutController extends Controller
             $dataPost = $request->all();
             $user = auth()->user();
             $cartItems = session()->get('cart');
-            dd($cartItems);
+            
             $stores = array_unique(array_column($cartItems, 'store_id'));
             $refence = 'XPTO';
 
@@ -53,6 +54,8 @@ class CheckoutController extends Controller
             $userOrder = $user->orders()->create($userOrder);
 
 		    $userOrder->stores()->sync($stores);
+
+            $store = (new Store())->notifyStoreOwners($stores);
 
             session()->forget('cart');
             session()->forget('pagseguro_session_code');

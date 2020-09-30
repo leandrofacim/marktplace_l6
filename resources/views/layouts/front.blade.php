@@ -8,7 +8,6 @@
     <title>Marketplace L6</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href=" {{asset('css/app.css')}} ">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .front.row {
             margin-bottom: 40px;
@@ -64,6 +63,15 @@
                       <a class="dropdown-item" href="{{route('user.orders')}} ">Meus pedidos</a>
                       {{-- <a class="dropdown-item" href="#">Another action</a> --}}
                       <div class="dropdown-divider"></div>
+                      <a 
+                      class="dropdown-item" href="#" 
+                      onclick="event.preventDefault()
+                      document.querySelector('form.logout').submit()
+                      ">Sair
+                  </a>
+                  <form action="{{route('logout')}}" style="display: none;" method="POST" class="logout">
+                      @csrf
+                  </form>
                       {{-- <a class="dropdown-item" href="#">Something else here</a> --}}
                     </div>
                   </li>

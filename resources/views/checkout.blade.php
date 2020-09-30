@@ -13,8 +13,8 @@
                 </div>
             </div>
             <hr>
-            <form action="#" method="POST">
-
+            <form action="" method="POST">
+                
                 <div class="row">
                     <div class="col-md-12 form-group">
                         <label>Nome no cartão</label>

@@ -32,15 +32,15 @@ Route::prefix('checkout.')->name('checkout.')->group(function () {
     Route::get('/thanks', 'CheckoutController@thanks')->name('thanks');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    
-    Route::get('my-orders', 'UserOrderController@index')->name('user.orders');
+Route::get('my-orders', 'UserOrderController@index')->name('user.orders')->middleware('access.control.store.admin');
+
+Route::group(['middleware' => ['auth', 'access.control.store.admin']], function () {
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::resource('stores', 'StoreController');
         Route::resource('products', 'ProductsController');
         Route::resource('categories', 'CategoryController');
-        
+
         Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
 
         Route::get('orders/my', 'OrdersController@index')->name('orders.my');

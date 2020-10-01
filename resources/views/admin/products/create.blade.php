@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
         <label for="">Preço</label>
-        <input class="form-control @error('price') is-invalid @enderror" type="text" name="price">
+        <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="price">
         @error('price')
             <div class="invalid-feedback">
                 {{$message}}
@@ -43,7 +43,7 @@
     </div>
     <div class="form-group">
         <label for="">Categoria</label>
-        <select class=" selectpicker form-control" id="select-category" title="Selecione as Categorias" multiple data-live-search="true" name="categories[]">
+        <select class="  form-control" id="select-category" title="Selecione as Categorias" multiple data-live-search="true" name="categories[]">
             @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
@@ -65,8 +65,9 @@
 
 @endsection
 
-<script>
-$(function () {
-    $('select').selectpicker();
-});
-</script>
+@section('scripts')
+    <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"> </script>
+    <script>
+        $('#price').maskMoney({prefix: '', allowNegative: false, thousands: '.', decimal: ','});
+    </script>
+@endsection

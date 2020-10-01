@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\RedirectController;
 
 class LoginController extends Controller
 {
@@ -41,8 +42,13 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if (session()->has('cart')) {
+        if ($user->role == 'ROLE_OWNER')
+            return redirect()->route('admin.stores.index');
+
+        if ($user->role == 'ROLE_USER' && session()->has('cart')) {
             return redirect()->route('checkout.index');
+        } else {
+            return redirect()->route('home');
         }
 
         return null;

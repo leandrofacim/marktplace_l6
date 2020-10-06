@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
         <label for="">Categoria</label>
-        <select class="selectpicker form-control" multiple data-live-search="true" name="categories[]">
+        <select class=" form-control" multiple data-live-search="true" name="categories[]">
             @foreach ($categories as $category)
                 <option 
                     value="{{$category->id}}"
@@ -68,10 +68,10 @@
 @endsection
 
 
-
+{{-- 
 <script>
     $(function () {
         $('select').selectpicker();
     });
 </script>
-    
+     --}}

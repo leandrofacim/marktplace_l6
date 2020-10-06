@@ -10,47 +10,44 @@ class CartController extends Controller
     public function index()
     {
         $carts = session()->has('cart') ? session()->get('cart') : [];
-        
+
         return view('cart', compact('carts'));
     }
 
     public function add(Request $request)
     {
         $productData = $request->get('product');
-        
+
         $product = \App\Product::whereSlug($productData['slug']);
-        
-        if (!$product->count() || $productData['amount'] <= 0) 
+
+        if (!$product->count() || $productData['amount'] <= 0)
             return redirect()->route('home');
-        
-        $product = $product->first(['name', 'price', 'store_id'])->toArray();
-        
-        $product = array_merge($productData, $product);
-        
+
+        $product = array_merge(
+            $productData,
+            $product->first(['id', 'name', 'price', 'store_id'])->toArray()
+        );
         if (session()->has('cart')) {
+
             $products = session()->get('cart');
             $productsSlugs = array_column($products, 'slug');
 
             if (in_array($product['slug'], $productsSlugs)) {
-                
-                $products = $this->productIncrement(
-                        $product['slug'],
-                        $product['amount'],
-                        $products
-                );
+
+                $products = $this->productIncrement($product['slug'], $product['amount'], $products);
 
                 session()->put('cart', $products);
             } else {
+
                 session()->push('cart', $product);
             }
         } else {
-            $prosucts[] = $product;
+            $products[] = $product;
 
-            session()->put('cart', $prosucts);
+            session()->put('cart', $products);
         }
 
-        flash('Produto adicionado ao carrinho')->success();
-
+        flash('Produto Adicionado no carrinho!')->success();
         return redirect()->route('product.single', ['slug' => $product['slug']]);
     }
 

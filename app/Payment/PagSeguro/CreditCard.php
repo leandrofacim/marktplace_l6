@@ -6,14 +6,14 @@ class CreditCard
     private $items;
     private $user;
     private $cardInfo;
-    private $refence;
+    private $reference;
 
-    public function __construct($items, $user, $cardInfo, $refence)
+    public function __construct($items, $user, $cardInfo, $reference)
     {
         $this->items    = $items;
         $this->user     = $user;
         $this->cardInfo = $cardInfo;
-        $this->refence = $refence;
+        $this->reference = $reference;
     }
 
     public function doPayment()
@@ -22,18 +22,18 @@ class CreditCard
 
         $creditCard->setReceiverEmail(env('PAGSEGURO_EMAIL'));
 
-        $creditCard->setReference($this->refence);
+        $creditCard->setReference(base64_encode($this->reference));
 
         $creditCard->setCurrency("BRL");
 
         foreach($this->items as $item) {
-            $creditCard->addItems()->withParameters(
-                $this->refence,
-                $item['name'],
-                $item['amount'],
-                $item['price']
-            );
-        }
+			$creditCard->addItems()->withParameters(
+				$item['id'],
+				$item['name'],
+				$item['amount'],
+				$item['price']
+			);
+		}
 
         $user = $this->user;
         $email = env('PAGSEGURO_ENV') == 'sandbox' ? 'test@sandbox.pagseguro.com.br' : $user->email;

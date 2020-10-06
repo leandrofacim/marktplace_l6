@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82ef313f17da7877030cc27f538807f9",
+    "content-hash": "47dc16b52a87e81d0b8da3af0356cc28",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1538,7 +1538,7 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.9.3",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
@@ -6003,7 +6003,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ramsey/uuid": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

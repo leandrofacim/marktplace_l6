@@ -66,7 +66,6 @@ class ProductsController extends Controller
         
         $data['price'] = formatPriceToDatabase($data['price']);
         
-        
         $store = auth()->user()->store;
         
         $product = $store->products()->create($data);
